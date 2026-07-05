@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from crowe_browse.engine.base import SEL, Element
-from crowe_browse.extract import interactive_elements
+from crowe_browse.extract import _ROLE
 
 
 class PlaywrightEngine:
@@ -59,7 +59,23 @@ class PlaywrightEngine:
         return await self._page.content()
 
     async def elements(self) -> list[Element]:
-        return interactive_elements(await self.current_html())
+        # Enumerate via the SAME locator that click/type_text resolve against
+        # (page.locator(SEL).nth(ref)), so a ref index maps to exactly the
+        # element an action will hit. A pure-HTML parse of page.content()
+        # diverges from Playwright's DOM on shadow-root / <template> pages,
+        # which would make click(ref) hit the wrong element.
+        handles = await self._page.locator(SEL).element_handles()
+        out: list[Element] = []
+        for i, h in enumerate(handles):
+            tag = (await h.evaluate("e => e.tagName")).lower()
+            name = await h.evaluate(
+                "e => (e.innerText || e.getAttribute('aria-label') || "
+                "e.getAttribute('placeholder') || e.value || "
+                "e.getAttribute('name') || e.getAttribute('href') || "
+                "'').trim().slice(0, 80)"
+            )
+            out.append(Element(ref=i, role=_ROLE.get(tag, tag), name=name, tag=tag))
+        return out
 
     async def click(self, ref: int) -> None:
         await self._page.locator(SEL).nth(ref).click(timeout=15000)
