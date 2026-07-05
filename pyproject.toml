@@ -1,0 +1,25 @@
+[project]
+name = "crowe-browse"
+version = "0.1.0"
+description = "Agent-driven web browser exposed as Crowe kernel tools (the Comet engine)"
+requires-python = ">=3.11"
+dependencies = [
+    "crowe-agent-core",
+    "playwright>=1.48.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0.0", "pytest-asyncio>=0.24.0"]
+
+[tool.uv.sources]
+crowe-agent-core = { path = "../crowe-agent-core", editable = true }
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+
+[tool.setuptools.packages.find]
+include = ["crowe_browse*"]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
