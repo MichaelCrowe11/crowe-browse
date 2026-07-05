@@ -7,7 +7,6 @@ the tool layer drives the browser to SEARCH_URL and passes the content here.
 
 from __future__ import annotations
 
-import re
 from html import unescape
 from html.parser import HTMLParser
 from urllib.parse import parse_qs, urlparse
