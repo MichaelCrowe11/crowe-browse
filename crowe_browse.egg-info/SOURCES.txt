@@ -1,0 +1,7 @@
+pyproject.toml
+crowe_browse/__init__.py
+crowe_browse.egg-info/PKG-INFO
+crowe_browse.egg-info/SOURCES.txt
+crowe_browse.egg-info/dependency_links.txt
+crowe_browse.egg-info/requires.txt
+crowe_browse.egg-info/top_level.txt

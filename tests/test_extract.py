@@ -24,3 +24,9 @@ def test_interactive_elements_enumerates_in_order():
     assert els[0].role == "link" and els[0].name == "First Link"
     assert els[1].role == "textbox" and "Search here" in els[1].name
     assert els[2].role == "button" and els[2].name == "Go"
+
+
+def test_readable_text_drops_page_title():
+    text = readable_text(_read("article.html"))
+    assert "Oyster Guide" not in text  # the page <title> is metadata, not body text
+    assert "Blue oyster fruits at 15 to 21 C." in text  # real content still present

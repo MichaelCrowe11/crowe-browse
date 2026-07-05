@@ -10,7 +10,7 @@ import re
 from dataclasses import dataclass
 from html.parser import HTMLParser
 
-_SKIP_TAGS = {"script", "style", "noscript", "nav", "header", "footer", "aside"}
+_SKIP_TAGS = {"script", "style", "noscript", "nav", "header", "footer", "aside", "title"}
 _BLOCK_TAGS = {
     "p", "div", "section", "article", "br", "li", "h1", "h2", "h3", "h4", "tr",
 }
