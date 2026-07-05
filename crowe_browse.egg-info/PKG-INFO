@@ -1,0 +1,10 @@
+Metadata-Version: 2.4
+Name: crowe-browse
+Version: 0.1.0
+Summary: Agent-driven web browser exposed as Crowe kernel tools (the Comet engine)
+Requires-Python: >=3.11
+Requires-Dist: crowe-agent-core
+Requires-Dist: playwright>=1.48.0
+Provides-Extra: dev
+Requires-Dist: pytest>=8.0.0; extra == "dev"
+Requires-Dist: pytest-asyncio>=0.24.0; extra == "dev"

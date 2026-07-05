@@ -1,0 +1,8 @@
+<html><body>
+<div id="host"></div>
+<button id="light">LightButton</button>
+<script>
+  var root = document.getElementById('host').attachShadow({mode: 'open'});
+  root.innerHTML = '<button id="shadow">ShadowButton</button>';
+</script>
+</body></html>
